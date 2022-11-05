@@ -1,4 +1,4 @@
-import { DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Schoolgrade } from "../../schoolgrades/entities/schoolgrade.entity";
 import { Schoollevel } from "../../schoollevels/entities/schoollevel.entity";
 
@@ -12,6 +12,9 @@ export class Schoolclass {
 
     @ManyToOne(() => Schoolgrade, (schoolgrade) => schoolgrade.schoolclasses)
     schoolgrade: Schoolgrade;
+
+    @Column()
+    price: number;
 
     @DeleteDateColumn({ name: 'deleted_at', select: false })
     deletedAt: Date;

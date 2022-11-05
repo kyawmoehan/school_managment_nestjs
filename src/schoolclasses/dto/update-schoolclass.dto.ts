@@ -1,11 +1,15 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNumber, IsOptional } from "class-validator";
 
 export class UpdateSchoolclassDto {
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     levelId: number;
 
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     gradeId: number;
+
+    @IsNumber()
+    @IsOptional()
+    price: number;
 }

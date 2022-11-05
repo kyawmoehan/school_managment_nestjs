@@ -8,4 +8,8 @@ export class CreateSchoolclassDto {
     @IsNumber()
     @IsNotEmpty()
     gradeId: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    price: number;
 }
