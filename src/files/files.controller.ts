@@ -1,8 +1,10 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import { FilesService } from './files.service';
 
+@ApiTags('Get Files')
 @Controller('files')
 export class FilesController {
   constructor(private readonly filesService: FilesService) { }

@@ -6,9 +6,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Student')
+@ApiBearerAuth()
 @Controller('students')
 @UseGuards(JwtAuthGuard)
 export class StudentsController {

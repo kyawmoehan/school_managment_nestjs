@@ -15,6 +15,7 @@ import { SchoolgradesModule } from '../schoolgrades/schoolgrades.module';
     SchoolgradesModule
   ],
   controllers: [SchoolclassesController],
-  providers: [SchoolclassesService]
+  providers: [SchoolclassesService],
+  exports: [SchoolclassesService]
 })
 export class SchoolclassesModule { }

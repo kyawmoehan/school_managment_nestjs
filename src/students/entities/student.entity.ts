@@ -1,4 +1,5 @@
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { EnrollStudent } from "../../enrollstudents/entities/enrollstudent.entity";
 
 @Entity('students')
 export class Student {
@@ -16,4 +17,7 @@ export class Student {
 
     @DeleteDateColumn({ name: 'deleted_at', select: false })
     deletedAt: Date;
+
+    @OneToMany(() => EnrollStudent, enrollstudent => enrollstudent.student)
+    enrollstudents: EnrollStudent[];
 }

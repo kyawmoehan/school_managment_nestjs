@@ -15,6 +15,8 @@ import { Schoolclass } from './schoolclasses/entities/schoolclass.entity';
 import { StudentsModule } from './students/students.module';
 import { Student } from './students/entities/student.entity';
 import { FilesModule } from './files/files.module';
+import { EnrollstudentsModule } from './enrollstudents/enrollstudents.module';
+import { EnrollStudent } from './enrollstudents/entities/enrollstudent.entity';
 
 @Module({
   imports: [
@@ -28,7 +30,7 @@ import { FilesModule } from './files/files.module';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [Role, User, Schoollevel, Schoolgrade, Schoolclass, Student],
+      entities: [Role, User, Schoollevel, Schoolgrade, Schoolclass, Student, EnrollStudent],
       synchronize: true,
     }),
     UsersModule,
@@ -39,6 +41,7 @@ import { FilesModule } from './files/files.module';
     SchoolclassesModule,
     StudentsModule,
     FilesModule,
+    EnrollstudentsModule,
   ],
   controllers: [],
   providers: [],

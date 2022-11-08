@@ -17,7 +17,10 @@ export class SchoolclassesService {
   ) { }
 
   async create(createSchoolclassDto: CreateSchoolclassDto) {
-    const { schoollevel, schoolgrade } = await this.findLevelAndGrade(createSchoolclassDto);
+    const { schoollevel, schoolgrade } = await this.findLevelAndGrade(
+      createSchoolclassDto.levelId,
+      createSchoolclassDto.gradeId
+    );
     const price = createSchoolclassDto.price;
     const newSchoolClass = this.schoolclassRepository.create({ price, schoollevel, schoolgrade });
     return this.schoolclassRepository.save(newSchoolClass);
@@ -55,11 +58,14 @@ export class SchoolclassesService {
     try {
       const schoolClass = await this.findOne(id);
       if (schoolClass) {
-        const { schoollevel, schoolgrade } = await this.findLevelAndGrade(updateSchoolclassDto);
+        const { schoollevel, schoolgrade } = await this.findLevelAndGrade(
+          updateSchoolclassDto.levelId || schoolClass.schoollevel.id,
+          updateSchoolclassDto.gradeId || schoolClass.schoolgrade.id
+        );
         const price = updateSchoolclassDto.price;
 
-        const schoolClass = this.schoolclassRepository.create({ price, schoollevel, schoolgrade });
-        return this.schoolclassRepository.update(id, schoolClass);
+        const updateSchoolClass = this.schoolclassRepository.create({ price, schoollevel, schoolgrade });
+        return this.schoolclassRepository.update(id, updateSchoolClass);
       }
     } catch (e) {
       throw new e;
@@ -77,11 +83,7 @@ export class SchoolclassesService {
     }
   }
 
-  async findLevelAndGrade(
-    dto: CreateSchoolclassDto | UpdateSchoolclassDto
-  ) {
-    // find level and grade
-    const { levelId, gradeId } = dto;
+  async findLevelAndGrade(levelId: number, gradeId: number) {
     const schoollevel = await this.schoollevelsService.findOne(levelId);
     const schoolgrade = await this.schoolgradesService.findOne(gradeId);
     return { schoollevel, schoolgrade };
