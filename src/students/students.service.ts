@@ -43,8 +43,21 @@ export class StudentsService {
     throw new NotFoundException('Student not found');
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+  async update(id: number, updateStudentDto: UpdateStudentDto, image: Express.Multer.File) {
+    try {
+      const student = await this.findOne(id);
+      if (student) {
+        let path = student.image;
+        if (image) {
+          path = image.path;
+          this.removeFile(student.image);
+        }
+        const updateStudent = this.studentRepository.create({ ...updateStudentDto, image: path });
+        return this.studentRepository.update(id, updateStudent);
+      }
+    } catch (e) {
+      throw e;
+    }
   }
 
   async remove(id: number) {

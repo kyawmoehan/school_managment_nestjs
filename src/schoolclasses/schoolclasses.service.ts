@@ -57,7 +57,7 @@ export class SchoolclassesService {
       if (schoolClass) {
         const { schoollevel, schoolgrade } = await this.findLevelAndGrade(updateSchoolclassDto);
         const price = updateSchoolclassDto.price;
-        console.log(updateSchoolclassDto);
+
         const schoolClass = this.schoolclassRepository.create({ price, schoollevel, schoolgrade });
         return this.schoolclassRepository.update(id, schoolClass);
       }
