@@ -13,7 +13,7 @@ export class RolesService {
   ) { }
 
   async create(createRoleDto: CreateRoleDto): Promise<Role> {
-    const nameExit = this.roleRepository.findOne({
+    const nameExit = await this.roleRepository.findOne({
       where: {
         name: createRoleDto.name
       }

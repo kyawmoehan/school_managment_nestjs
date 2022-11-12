@@ -30,8 +30,12 @@ import { EnrollStudent } from './enrollstudents/entities/enrollstudent.entity';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
+      ssl: {
+        rejectUnauthorized: false,
+        // ca: process.env.DATABASE_SSL,
+      },
       entities: [Role, User, Schoollevel, Schoolgrade, Schoolclass, Student, EnrollStudent],
-      synchronize: true,
+      synchronize: false,
     }),
     UsersModule,
     RolesModule,
